@@ -1,17 +1,14 @@
-# frontend/Dockerfile
-FROM node:18
+# Dockerfile (frontend)
 
-WORKDIR /app
+FROM nginx:stable-alpine
+WORKDIR /usr/share/nginx/html
 
-COPY package.json package-lock.json ./
-RUN npm install
+# Xóa các file mặc định của nginx
+RUN rm -rf ./*
 
-COPY . .
+# Chỉ copy thư mục build vào
+COPY build/ .
 
-RUN npm run build
-
-EXPOSE 3000
-
-# Dùng serve để chạy static build
-RUN npm install -g serve
-CMD ["serve", "-s", "build", "-l", "3000"]
+# Mặc định dùng nginx để serve static
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

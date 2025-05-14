@@ -92,15 +92,13 @@ import os
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('POSTGRES_DB', 'pharmacy'),
-        'USER': os.environ.get('POSTGRES_USER', 'pharmacy'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'pharmacy'),
-        'HOST': os.environ.get('POSTGRES_HOST', 'db'),  # phải là 'db'
+        'NAME': 'pharmacydb',
+        'USER': 'postgres',
+        'PASSWORD': '123456',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
