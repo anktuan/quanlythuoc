@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-tln)tx_7ps=-j%lcvjl0njj9*nbm5#0_1@i52glt@-(=dfs!md
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.1.3', 'pharmacy-management.click']
 
 
 # Application definition
@@ -84,18 +85,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pharmacy.wsgi.application'
 
-
+import os
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'pharmacydb',  
-        'USER': 'postgres',  
-        'PASSWORD': '123456', 
-        'HOST': 'localhost',
-        'PORT': '5432',  
+        'NAME': os.environ.get('POSTGRES_DB', 'pharmacy'),
+        'USER': os.environ.get('POSTGRES_USER', 'pharmacy'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'pharmacy'),
+        'HOST': os.environ.get('POSTGRES_HOST', 'db'),  # phải là 'db'
+        'PORT': '5432',
     }
 }
 
